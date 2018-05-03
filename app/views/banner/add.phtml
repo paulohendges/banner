@@ -1,0 +1,32 @@
+<?php
+    $baseUri = $this->url->getBaseUri();
+?>
+<h4>Cadastro de Banner</h4>
+<p><?php $this->flashSession->output() ?></p>
+<div class="row" id="div-numero-slides">
+    <div class="col s12">
+    <fieldset>
+    <legend>Definição do Banner</legend>
+    <div class="input-field col s6" >
+        <input type="text" maxlength="1" name="numero-slides" id="numero-slides" placeholder="Informe o número de slides / Máximo: 3" pattern="[0-9]+$">
+        <label for="numero-slides" class="active">Número de Slides</label>
+    </div>
+    <div class="input-field col s6">
+        <a class="btn btn-medium blue-grey" id="definir-banner">ADICIONAR</a>
+    </div>
+    </fieldset>
+    </div>
+</div>
+<div class="row" id="div-banner" style="display: none">
+    <div class="col s12">
+        <form name="formBanner" id="formBanner" action="" method="POST" enctype="multipart/form-data">
+            <div id="div-slides">
+            </div>     
+            <div class="input-field col s12">
+                <!-- buttons -->
+                <a href="<?= $baseUri ?>" class="btn red">CANCELAR</a>
+                <button type="submit" class="btn blue-grey">CADASTRAR</button>
+            </div>
+        </form>
+    </div>
+</div>

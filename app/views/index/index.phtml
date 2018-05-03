@@ -1,0 +1,77 @@
+<?php
+    $baseUri = $this->url->getBaseUri();
+?>
+<h4>Gerenciamento de Banners</h4>
+<div class="row">
+    <div class="col s12">
+        <p><?php $this->flashSession->output() ?></p>
+    </div>
+</div>
+<div class="row">
+    <div class="col s12">
+        <a class="waves-effect waves-light btn green" href="<?=$baseUri?>banner/add">NOVO BANNER</a>
+    </div>
+</div>
+<div class="row">
+    <div class="col s12">
+        <fieldset>
+            <legend>Filtro de Banners</legend>
+            <form name="formBusca" action="" method="POST">
+            <div class="input-field col s2" >
+                <input type="text" name="banner_id" id="banner_id" placeholder="ID Banner">
+                <label for="banner_id" class="active">Identificador Banner</label>
+            </div>
+            <div class="input-field col s6" >
+                <input type="text" name="slides" id="slides" placeholder="Conteúdo Slide">
+                <label for="slides" class="active">Conteúdo dos Slides</label>
+            </div>
+            <div class="input-field col s4" >
+                <button type="submit" class="btn blue-grey">BUSCAR</button>
+            </div>
+            </form>
+        </fieldset>
+    </div>
+</div>
+<div class="row">
+    <div class="col s12">
+        <table class="table bordered">
+            <?php if(count($banners) > 0){?>
+            <thead>
+                <tr class="back">
+                    <th>ID</th>
+                    <th class="center">AÇÕES</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                    <?php foreach ($banners as $banner) { ?>
+                        <tr>
+                            <td><?=$banner['banner_id']?></td>
+                            <td class="center">
+                                <a class="btn-floating btn-small waves-effect waves-light blue" href="<?=$baseUri?>banner/edit/id/<?=$banner['banner_id']?>"><i class="material-icons small icon-demo">edit</i></a>
+                                <a class="btn-floating btn-small waves-effect waves-light green" href="<?=$baseUri?>banner/view/id/<?=$banner['banner_id']?>"><i class="material-icons small icon-demo">pageview</i></a>
+                                <a class="btn-floating btn-small waves-effect waves-light red" href="<?=$baseUri?>banner/remove/id/<?=$banner['banner_id']?>"><i class="material-icons small icon-demo">delete_forever</i></a>
+                            </td>
+                        </tr>
+                        <th class="back">SLIDES</th>
+                        <tr colspan="2">
+                            <?php $imagens = json_decode($banner['banner']); ?>
+                                <?php if(count($imagens) > 0 ) { ?>
+                            <td colspan="2">
+                                <?php foreach ($imagens as $key => $imagem) { ?>
+                                    <?="<span class='boldest'>Titulo: </span>".$imagem->titulo.'<br/>'?>
+                                    <?="<span class='boldest'>Sub Titulo: </span>".$imagem->subtitulo.'<br/>'?>
+                                    <?="<span class='boldest'>Imagem: </span>"."<a href='".$baseUri.$imagem->imagem."' download>Imagem ".$key.'</a><br/>'?>
+                                <br/>
+                                <?php } ?>
+                                <?php } ?>
+                                </td>
+                        </tr>
+                    <?php } ?>
+                <?php }else{ ?>
+                        <p>NENHUM BANNER CADASTRADO</p>
+                <?php } ?>
+            </tbody>
+        </table>
+    </div>
+</div>

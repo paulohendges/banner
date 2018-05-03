@@ -1,0 +1,41 @@
+<h4>Atualização de Banner</h4>
+<div class="row" id="div-banner" style="">
+    <div class="col s12">
+        <form name="formBanner" id="formBanner" action="" method="POST" enctype="multipart/form-data" novalidate="novalidate">
+            <input type="hidden" name="idBanner" value="<?=$banner->getBannerId()?>">
+            <?php foreach($banner->getBanner() as $key => $slide) { ?>
+            <div id="div-slides">
+                <fieldset style="margin-top:15px !important">
+                    <legend>Slide <?=$key?></legend>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input placeholder="Titulo do Banner" id="titulo<?=$key?>" name="titulo<?=$key?>" type="text" class="validate" value="<?=$slide->titulo?>">
+                            <label for="titulo1" class="active">Titulo</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input placeholder="Subtitulo do Banner" id="subtitulo<?=$key?>" type="text" name="subtitulo<?=$key?>" class="validate" value="<?=$slide->subtitulo?>">    
+                            <label for="subtitulo1" class="active">Subtitulo</label>
+                        </div> 
+                    </div>
+                    <div class="row">
+                        <div class="file-field input-field col s12"> 
+                            <div class="btn blue-grey">
+                                <span>IMAGEM</span>  
+                                <input type="file" name="img<?=$key?>">  
+                            </div>            
+                            <div class="file-path-wrapper">  
+                                <input class="file-path validate" type="text" name="imgslide<?=$key?>" placeholder="1280x400" value="<?= str_replace("imagens/", "", $slide->imagem)?>"> 
+                            </div>          
+                        </div>          
+                    </div>             
+                </fieldset>
+            </div>          
+            <?php } ?>
+            <div class="input-field col s12"> 
+                <!-- buttons -->             
+                <a href="/banner/" class="btn red">CANCELAR</a>
+                <button type="submit" class="btn blue-grey">ATUALIZAR</button>
+            </div>
+        </form>
+    </div>
+</div>
