@@ -149,6 +149,10 @@ class BannerController extends ControllerBase {
         try {
             $params = $this->dispatcher->getParams();
             $DbBanner = Banner::findFirst($params[1]);
+            // remove as imagens
+            foreach ($slides as $key => $slide) {
+                unlink($slide->imagem);
+            }
             if($DbBanner->delete()){
                 $this->flashSession->success("Banner removido com sucesso!");
                 $this->response->redirect('../banner');
